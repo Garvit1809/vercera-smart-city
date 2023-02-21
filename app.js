@@ -3,17 +3,20 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
+const authRouter = require("./routes/authRoutes");
+
 dotenv.config({ path: "./.env" });
 
 const app = express();
 
-app.use(
-  cors({
-    credentials: true,
-    origin: process.env.CLIENT_BASE_URL || "http://localhost:3000",
-  })
-);
+app.use(cors());
 app.use(express.json({ limit: "10kb" }));
+
+app.use("/api/v1/auth", authRouter);
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
 
 mongoose.set("strictQuery", true);
 mongoose
