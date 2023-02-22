@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles"
 export default makeStyles(() => ({
     modal: {
         borderRadius: '25px',
-        height: '70vh',
+        height: '40vh',
         overflow: 'auto',
         '& h1': {
             margin: '0 auto',

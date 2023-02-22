@@ -103,7 +103,7 @@ const SingleIssue = () => {
                     </UpdateList>
                 </Updates>
                 <Comments>
-                
+
                 </Comments>
             </Section>
         ) : <h2>Loding.... Waits!!!</h2>

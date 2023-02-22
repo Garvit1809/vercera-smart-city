@@ -75,14 +75,22 @@ const IssueCard = (props) => {
     console.log(data);
   }
 
+  const closeissueHandler = async (e) => {
+    // e.preventDefauslt();
+    const { data } = await axios.patch(`${BASE_URL}${API}/issue/${issue._id}/close`, {}, {
+        headers: getHeaders(userData.token),
+    });
+    console.log(data);
+  }
+
   const navigate = useNavigate();
   const singlePageNavigator = () => {
     navigate(`/issues/${issue._id}`)
   }
 
     return (
-        <Section onClick={singlePageNavigator} >
-            <IssueContent>
+        <Section >
+            <IssueContent onClick={singlePageNavigator} >
                 <p>
                     {issue.issueContent}
                 </p>
@@ -90,11 +98,11 @@ const IssueCard = (props) => {
                     <img src={issue.issuePics} alt="" />
                 </IssueImage>
             </IssueContent>
-            <Location>
+            <Location onClick={singlePageNavigator} >
                 <h5>Location :-</h5>
                 <h4>{issue.locationAddressFirstLine} {issue.locationAddressSecondLine}, {issue.locationCity}, {issue.postalCode}</h4>
             </Location>
-            <AuthorDetails>
+            <AuthorDetails onClick={singlePageNavigator} >
                 <h5>Raise By :-</h5>
                 <ImageContainer>
                     <img src={issue.issueRaisedBy.photo} alt="" />
@@ -127,7 +135,7 @@ const IssueCard = (props) => {
             }
             {
                 issue.isIssueApproved && !issue.isIssueResolved && userData.isHelper && issue.issueUpdates.length > 0 ?
-                <button>Close Issue</button> : null
+                <button onClick={closeissueHandler} >Close Issue</button> : null
             }
         </Section>
     )
