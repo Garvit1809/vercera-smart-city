@@ -52,6 +52,12 @@ const issueSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "Helper",
   },
+  issueUpdates: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'IssueUpdate'
+    }
+  ]
 });
 
 const Issue = mongoose.model("Issue", issueSchema);

@@ -14,6 +14,8 @@ const issueUpdateSchema = new mongoose.Schema({
         type: String
     }
   ]
+}, {
+  timestamps: true
 });
 
 const IssueUpdate = mongoose.model("IssueUpdate", issueUpdateSchema);

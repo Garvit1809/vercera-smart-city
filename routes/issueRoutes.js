@@ -2,13 +2,14 @@ const express = require('express');
 
 const authController = require('../controllers/authController');
 const issueController = require('../controllers/issueController');
+const issueUpdateRouter = require('./issueUpdateRoutes')
 
 const router = express.Router();
 
-router.use(authController.protect);
+router.use("/:issueId", issueUpdateRouter);
 
 router.get('/', issueController.getAllIssues);
-router.post('/', issueController.createIssue);
+router.post('/', authController.protect, issueController.createIssue);
 
 router.use(issueController.getIssuesForFilter);
 
