@@ -36,13 +36,12 @@ exports.signup = catchAsync(async (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
     photo: req.body.photo,
-    occupation: req.body.occupation,
-    password: req.body.password,
     aadhaarCardNumber: req.body.aadhaarCardNumber,
-    aadhaarCard: req.body.aadhaarCard,
     phoneNumber: req.body.phoneNumber,
+    password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
+  // aadhaaar file to be taken
   createSendToken(newUser, 201, res);
 });
 

@@ -34,10 +34,6 @@ const userSchema = new mongoose.Schema({
       message: "Passwords are not the same!",
     },
   },
-  occupation: {
-    type: String,
-    required: [true, 'What u do for living!!']
-  },
   phoneNumber: {
     type: String,
     required: [true, "Please enter your contact number"],
@@ -47,10 +43,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "You must enter your Aadhar card no.!!"],
   },
-  aadhaarCard: {
-    type: String,
-    required: [true, "You must enter your Aadhar card no. for verification!!"],
-  }
 });
 
 userSchema.pre("save", async function (next) {
