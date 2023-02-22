@@ -9,7 +9,7 @@ const Section = styled.div``
 
 const NotificationGrid = styled.div`
 border: 1px solid red;
-/* min-he */
+/* min-hei */
 `
 
 const NotificationCard = styled.div`

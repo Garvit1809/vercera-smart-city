@@ -71,6 +71,9 @@ issueSchema.pre(/^find/, function (next) {
   }).populate({
     path: 'issueClosedBy',
     select: 'name photo'
+  }).populate({
+    path: 'issueUpdates',
+    // select:
   })
   next();
 });
