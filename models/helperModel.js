@@ -49,6 +49,10 @@ const helperSchema = new mongoose.Schema({
       ref: "Issue",
     },
   ],
+  isHelper: {
+    type: Boolean,
+    default: true
+  }
 });
 
 helperSchema.methods.correctPassword = async function (

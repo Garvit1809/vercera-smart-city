@@ -66,6 +66,20 @@ const issueSchema = new mongoose.Schema({
   ]
 });
 
+issueSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "issueRaisedBy",
+    select: "name photo",
+  }).populate({
+    path: "issueApprovedBy",
+    select: "name photo",
+  }).populate({
+    path: 'issueClosedBy',
+    select: 'name photo'
+  })
+  next();
+});
+
 const Issue = mongoose.model("Issue", issueSchema);
 
 module.exports = Issue;

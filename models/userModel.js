@@ -42,6 +42,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "You must enter your Aadhar card no.!!"],
   },
+  isHelper: {
+    type: Boolean,
+    default: false
+  }
 });
 
 userSchema.pre("save", async function (next) {

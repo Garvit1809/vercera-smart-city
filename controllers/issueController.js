@@ -47,18 +47,12 @@ exports.createIssue = catchAsync(async (req, res, next) => {
 
 exports.getUnapprovedIssues = catchAsync(async (req, res, next) => {
   console.log('unapproved');
-  const issues = await Issue.find().populate('comments');
+  const issues = await Issue.find();
 
   if (!issues) {
     return next(new AppError("Try Again!!!"));
   }
-
-  // const unapprovedIssues = issues.filter((issue) => {
-  //   !issue.isIssueApproved;
-  //   console.log(issue.isIssueApproved);
-  //   console.log(issue.postalCode);
-  // });
-
+  
   let unapprovedIssues = [];
 
   issues.forEach(issue => {

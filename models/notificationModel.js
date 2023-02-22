@@ -13,6 +13,14 @@ const notificationSchema = new mongoose.Schema({
     timestamps: true
 });
 
+notificationSchema.pre(/^find/, function (next) {
+    this.populate({
+      path: "notifiedBy",
+      select: "name",
+    })
+    next();
+  });
+
 const Notification = mongoose.model("Notification", notificationSchema);
 
 module.exports = Notification;
