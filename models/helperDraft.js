@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
-const bcrypt = require("bcryptjs");
 
 const helperDraftSchema = new mongoose.Schema({
   user: {
@@ -9,7 +7,7 @@ const helperDraftSchema = new mongoose.Schema({
   },
   socialWorkDone: [
     {
-        typr: String,
+        type: String,
         required: [true, 'Tell us what good things u have done for society!!']
     }
   ],

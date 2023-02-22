@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 
 const authRouter = require("./routes/authRoutes");
+const userRouter = require("./routes/userRoutes");
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 
@@ -15,6 +16,7 @@ app.use(cors());
 app.use(express.json({ limit: "10kb" }));
 
 app.use("/api/v1/auth", authRouter);
+app.use('/api/v1/user', userRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

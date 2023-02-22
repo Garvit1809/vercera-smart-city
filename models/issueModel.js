@@ -34,6 +34,14 @@ const issueSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "User",
   },
+  isIssueResolved: {
+    type: Boolean,
+    default: false
+  },
+  isIssueApproved: {
+    type: Boolean,
+    default: false
+  },
   issueApprovedBy: [
     {
       type: mongoose.Schema.ObjectId,
