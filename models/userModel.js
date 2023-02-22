@@ -38,38 +38,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'What u do for living!!']
   },
-  addressFirstLine: {
-    type: String,
-    required: [true, "We need your address!!"],
-    trim: true,
-  },
-  addressSecondLine: {
-    type: String,
-    required: [true, "We need your address!!"],
-    trim: true,
-  },
-  postalCode: {
-    type: String,
-    required: [true, "you need to specify your postal code"],
-    trim: true,
-  },
   phoneNumber: {
     type: String,
     required: [true, "Please enter your contact number"],
     trim: true,
   },
-  addharCardNumber: {
+  aadhaarCardNumber: {
     type: String,
     required: [true, "You must enter your Aadhar card no.!!"],
   },
-  aadharCard: {
+  aadhaarCard: {
     type: String,
     required: [true, "You must enter your Aadhar card no. for verification!!"],
-  },
-  isHelper: {
-    type: Boolean,
-    default: false,
-  },
+  }
 });
 
 userSchema.pre("save", async function (next) {

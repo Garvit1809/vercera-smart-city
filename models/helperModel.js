@@ -39,6 +39,10 @@ const helperSchema = new mongoose.Schema({
     required: [true, "you need to specify your postal code"],
     trim: true,
   },
+  city: {
+    typ: String,
+    required: [true, 'City is requuired']
+  },
   phoneNumber: {
     type: String,
     required: [true, "Please enter your contact number"],
@@ -48,7 +52,11 @@ const helperSchema = new mongoose.Schema({
     type: String,
     required: [true, "Provide an additional contact number"],
   },
-  aadharCard: {
+  aadhaarCardNumber: {
+    type: String,
+    required: [true, "You must enter your Aadhar card no.!!"],
+  },
+  aadhaarCard: {
     type: String,
     required: [true, "You must enter your Aadhar card no. for verification!!"],
   },
