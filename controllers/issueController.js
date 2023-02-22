@@ -47,7 +47,7 @@ exports.createIssue = catchAsync(async (req, res, next) => {
 
 exports.getUnapprovedIssues = catchAsync(async (req, res, next) => {
   console.log('unapproved');
-  const issues = await Issue.find();
+  const issues = await Issue.find().populate('comments');
 
   if (!issues) {
     return next(new AppError("Try Again!!!"));
@@ -78,7 +78,7 @@ exports.getUnapprovedIssues = catchAsync(async (req, res, next) => {
 
 exports.getApprovedIssues = catchAsync(async (req, res, next) => {
   console.log('approved');
-  const issues = await Issue.find();
+  const issues = await Issue.find().populate('comments');
 
   if (!issues) {
     return next(new AppError("Try Again!!!"));
@@ -105,7 +105,7 @@ exports.getApprovedIssues = catchAsync(async (req, res, next) => {
 
 exports.getResolvedIssues = catchAsync(async (req, res, next) => {
   console.log('resolved');
-  const issues = await Issue.find();
+  const issues = await Issue.find().populate('comments');
 
   if (!issues) {
     return next(new AppError("Try Again!!!"));
@@ -141,7 +141,7 @@ exports.protectIssue = catchAsync(async (req, res, next) => {
 exports.getOneIssue = catchAsync(async (req,res,next) => {
   const issueId = req.params.issueId;
 
-  const issue = await Issue.findById(issueId);
+  const issue = await Issue.findById(issueId).populate('comments');
 
   if (!issue) {
     return next(new AppError('No such issue exist!!'))

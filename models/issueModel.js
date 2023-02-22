@@ -57,6 +57,12 @@ const issueSchema = new mongoose.Schema({
       type: mongoose.Schema.ObjectId,
       ref: 'IssueUpdate'
     }
+  ],
+  comments: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Comment'
+    }
   ]
 });
 

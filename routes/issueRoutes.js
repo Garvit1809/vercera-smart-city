@@ -3,8 +3,11 @@ const express = require('express');
 const authController = require('../controllers/authController');
 const issueController = require('../controllers/issueController');
 const helperController = require('../controllers/helperController');
+const commentRouter = require('./commentRoutes')
 
 const router = express.Router();
+
+router.use("/:id/comment", commentRouter);
 
 router.get('/', issueController.getAllIssues);
 router.post('/', authController.protect, issueController.createIssue);

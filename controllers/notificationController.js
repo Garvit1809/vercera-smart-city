@@ -5,11 +5,19 @@ const catchAsync = require("../utils/catchAsync");
 exports.getAllNotifications = catchAsync(async (req,res,next) => {
     const notifications = await Notification.find();
 
-    res.statsu(200).json({
+    res.status(200).json({
         status: 'success',
         notifications
     })
 });
+
+exports.protectNotification = catchAsync(async (req, res, next) => {
+    const helperId = req.helper.id;
+  
+    if (helperId) {
+      next();
+    } else return next(new AppError("Notifications can be given by only Helpers!!"));
+  });
 
 exports.createNotification = catchAsync(async(req,res,next) => {
     const helperId = req.helper.id;
