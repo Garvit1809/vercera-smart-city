@@ -40,7 +40,7 @@ const helperSchema = new mongoose.Schema({
     trim: true,
   },
   city: {
-    typ: String,
+    type: String,
     required: [true, 'City is requuired']
   },
   phoneNumber: {
