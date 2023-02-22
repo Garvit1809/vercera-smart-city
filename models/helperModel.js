@@ -24,25 +24,6 @@ const helperSchema = new mongoose.Schema({
     minlength: 6,
     select: false,
   },
-  addressFirstLine: {
-    type: String,
-    required: [true, "We need your address!!"],
-    trim: true,
-  },
-  addressSecondLine: {
-    type: String,
-    required: [true, "We need your address!!"],
-    trim: true,
-  },
-  postalCode: {
-    type: String,
-    required: [true, "you need to specify your postal code"],
-    trim: true,
-  },
-  city: {
-    type: String,
-    required: [true, 'City is requuired']
-  },
   phoneNumber: {
     type: String,
     required: [true, "Please enter your contact number"],

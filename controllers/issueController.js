@@ -1,22 +1,14 @@
-// create issue
-// get all issues --> for dev
-// get approved issues
-// get completed issues
-// get unapproved issues
-
-// update issues
-// protect issue
-
 const Issue = require("../models/issueModel");
 const IssueUpdate = require("../models/issueUpdateModel");
 const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 
 exports.getAllIssues = catchAsync(async (req, res, next) => {
-  const allIssues = Issue.find();
+  const allIssues = await Issue.find();
 
   res.status(200).json({
     status: "success",
+    totalIssues: allIssues.length,
     allIssues,
   });
 });
@@ -53,59 +45,88 @@ exports.createIssue = catchAsync(async (req, res, next) => {
   });
 });
 
-let issues = [];
+exports.getUnapprovedIssues = catchAsync(async (req, res, next) => {
+  console.log('unapproved');
+  const issues = await Issue.find();
 
-const issueError = () => {
   if (!issues) {
     return next(new AppError("Try Again!!!"));
   }
-};
 
-exports.getIssuesForFilter = catchAsync(async (req, res, next) => {
-  issues = await Issue.find();
-  next();
-});
+  // const unapprovedIssues = issues.filter((issue) => {
+  //   !issue.isIssueApproved;
+  //   console.log(issue.isIssueApproved);
+  //   console.log(issue.postalCode);
+  // });
 
-exports.getUnapprovedIssues = catchAsync(async (req, res, next) => {
-  issueError();
+  let unapprovedIssues = [];
 
-  issues.filter((issue) => {
-    !issue.isIssueApproved && issue.issueApprovedBy.length === 0;
+  issues.forEach(issue => {
+    if (!issue.isIssueApproved) {
+      unapprovedIssues.push(issue)
+    }
   });
 
+  console.log(unapprovedIssues);
+
   res.status(200).json({
-    sttaus: "success",
-    issues,
+    status: "success",
+    totalIssues: unapprovedIssues.length,
+    unapprovedIssues,
   });
 });
 
 exports.getApprovedIssues = catchAsync(async (req, res, next) => {
-  issueError();
+  console.log('approved');
+  const issues = await Issue.find();
 
-  issues.filter((issue) => {
-    issue.isIssueApproved &&
-      issue.issueApprovedBy.length > 0 &&
-      !issue.isIssueResolved;
+  if (!issues) {
+    return next(new AppError("Try Again!!!"));
+  }
+
+  // const approvedIssues = issues.filter((issue) => {
+  //   issue.isIssueApproved && !issue.isIssueResolved;
+  // });
+
+  let approvedIssues = [];
+
+  issues.forEach(issue => {
+    if (issue.isIssueApproved && !issue.isIssueResolved) {
+      approvedIssues.push(issue)
+    }
   });
 
-  res.status(20).json({
+  res.status(200).json({
     status: "success",
-    issues,
+    totalIssues: approvedIssues.length,
+    approvedIssues,
   });
 });
 
 exports.getResolvedIssues = catchAsync(async (req, res, next) => {
-  issueError();
+  console.log('resolved');
+  const issues = await Issue.find();
 
-  issues.filter((issue) => {
-    issue.isIssueApproved &&
-      issue.issueApprovedBy.length > 0 &&
-      issue.isIssueResolved;
+  if (!issues) {
+    return next(new AppError("Try Again!!!"));
+  }
+
+  // let resolvedIssues = issues.filter((issue) => {
+  //   issue.isIssueApproved && issue.isIssueResolved;
+  // });
+
+  let resolvedIssues = [];
+
+  issues.forEach(issue => {
+    if (issue.isIssueApproved && issue.isIssueResolved) {
+      resolvedIssues.push(issue)
+    }
   });
 
-  res.status(20).json({
+  res.status(200).json({
     status: "success",
-    issues,
+    totalIssues: resolvedIssues.length,
+    resolvedIssues,
   });
 });
 
@@ -116,6 +137,21 @@ exports.protectIssue = catchAsync(async (req, res, next) => {
     next();
   } else return next(new AppError("Updates can be given by only Helpers!!"));
 });
+
+exports.getOneIssue = catchAsync(async (req,res,next) => {
+  const issueId = req.params.issueId;
+
+  const issue = await Issue.findById(issueId);
+
+  if (!issue) {
+    return next(new AppError('No such issue exist!!'))
+  }
+
+  res.status(200).json({
+    status: 'success',
+    issue
+  })
+})
 
 exports.updateIssue = catchAsync(async (req, res, next) => {
   const helperId = req.helper.id;

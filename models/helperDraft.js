@@ -15,6 +15,10 @@ const helperDraftSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Reason for becoming a helper!!']
   },
+  alternatePhoneNumber: {
+    type: String,
+    required: [true, "Provide an additional contact number"],
+  },
 });
 
 const HelperDraft = mongoose.model("HelperDraft", helperDraftSchema);

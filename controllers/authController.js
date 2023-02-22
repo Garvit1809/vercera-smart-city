@@ -87,6 +87,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   const helper = await Helper.findById(decoded.id);
 
   if (helper) {
+    console.log("helper");
     req.helper = helper;
     next();
   } else {
@@ -100,6 +101,7 @@ exports.protect = catchAsync(async (req, res, next) => {
       );
     }
     req.user = currentUser;
+    console.log("normal user");
     next();
   }
 });

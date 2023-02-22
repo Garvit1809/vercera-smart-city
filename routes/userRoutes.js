@@ -8,11 +8,11 @@ const router = express.Router();
 
 router.use(authController.protect);
 
-// for dev
 router.get('/allusers', userController.getAllUsers)
-
 router.get('/me', userController.getMe, userController.getUser);
-router.get('/:id', userController.getUser);
+router.get('/alldrafts', userController.getAllDrafts);
 router.post('/helper', userController.helperProposal);
+
+router.get('/:id', userController.getUser);
 
 module.exports = router;

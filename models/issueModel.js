@@ -42,15 +42,15 @@ const issueSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-  issueApprovedBy: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "Helper",
-    },
-  ],
+  issueApprovedBy: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Helper",
+    default: null
+  },
   issueClosedBy: {
     type: mongoose.Schema.ObjectId,
     ref: "Helper",
+    default: null
   },
   issueUpdates: [
     {
