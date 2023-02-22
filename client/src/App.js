@@ -7,6 +7,7 @@ import CompletedIssues from './pages/CompletedIssues';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Notification from './pages/Notification';
+import SingleIssue from './pages/SingleIssue';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/login' element={<Login/>} />
         <Route path='/' element={<Home/>} />
         <Route path='/issues' element={<Issues/>} />
+        <Route path='/issues/:id' element={<SingleIssue/>} />
         <Route path='/pending' element={<PendingIssues/>} />
         <Route path='/completed' element={<CompletedIssues/>} />
         <Route path='/notifications' element={<Notification/>} />

@@ -1,5 +1,10 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { API, BASE_URL } from '../utils/APIRoutes'
+import { localStorageUser } from '../utils/globalConstants'
+import { getHeaders } from '../utils/helperFunction'
 
 const Section = styled.div`
 border: 1px solid black;
@@ -50,16 +55,39 @@ const ApprovedBy = styled.div``
 const ClosedBy = styled.div``
 
 const IssueCard = (props) => {
-    // console.log(props.issue);
     const issue = props.issue;
+
+    const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    async function fetchUserData() {
+      const data = await JSON.parse(localStorage.getItem(localStorageUser));
+      setUserData(data);
+    }
+    fetchUserData();
+  }, []);
+
+  const approveIssueHandler = async (e) => {
+    // e.preventDefauslt();
+    const { data } = await axios.patch(`${BASE_URL}${API}/issue/${issue._id}/approve`, {}, {
+        headers: getHeaders(userData.token),
+    });
+    console.log(data);
+  }
+
+  const navigate = useNavigate();
+  const singlePageNavigator = () => {
+    navigate(`/issues/${issue._id}`)
+  }
+
     return (
-        <Section>
+        <Section onClick={singlePageNavigator} >
             <IssueContent>
                 <p>
                     {issue.issueContent}
                 </p>
                 <IssueImage>
-                <img src={issue.issuePics[0]} alt="" />
+                    <img src={issue.issuePics} alt="" />
                 </IssueImage>
             </IssueContent>
             <Location>
@@ -67,30 +95,39 @@ const IssueCard = (props) => {
                 <h4>{issue.locationAddressFirstLine} {issue.locationAddressSecondLine}, {issue.locationCity}, {issue.postalCode}</h4>
             </Location>
             <AuthorDetails>
-            <h5>Raise By :-</h5>
+                <h5>Raise By :-</h5>
                 <ImageContainer>
                     <img src={issue.issueRaisedBy.photo} alt="" />
                 </ImageContainer>
                 <h3>{issue.issueRaisedBy.name}</h3>
             </AuthorDetails>
             {
-                issue.isIssueApproved ? 
-                <ApprovedBy>
-                <h5>Approved By :-</h5>
-                <ImageContainer>
-                    <img src={issue.issueApprovedBy.photo} alt="" />
-                </ImageContainer>
-                <h3>{issue.issueApprovedBy.name}</h3>
-                </ApprovedBy> : null
+                issue.isIssueApproved ?
+                    <ApprovedBy>
+                        <h5>Approved By :-</h5>
+                        <ImageContainer>
+                            <img src={issue.issueApprovedBy.photo} alt="" />
+                        </ImageContainer>
+                        <h3>{issue.issueApprovedBy.name}</h3>
+                    </ApprovedBy> : null
             }
             {
-                issue.isIssueResolved ? 
-                <ClosedBy>
-                <ImageContainer>
-                    <img src={issue.issueClosedBy.photo} alt="" />
-                </ImageContainer>
-                <h3>{issue.issueClosedBy.name}</h3>
-                </ClosedBy> : null
+                issue.isIssueResolved ?
+                    <ClosedBy>
+                        <h5>Closed By :-</h5>
+                        <ImageContainer>
+                            <img src={issue.issueClosedBy.photo} alt="" />
+                        </ImageContainer>
+                        <h3>{issue.issueClosedBy.name}</h3>
+                    </ClosedBy> : null
+            }
+            {
+                !issue.isIssueApproved && userData.isHelper ? 
+                <button onClick={approveIssueHandler} >Approve Issue</button> : null
+            }
+            {
+                issue.isIssueApproved && !issue.isIssueResolved && userData.isHelper && issue.issueUpdates.length > 0 ?
+                <button>Close Issue</button> : null
             }
         </Section>
     )

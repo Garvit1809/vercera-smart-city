@@ -25,7 +25,9 @@ margin: 0 1rem;
 const Navbar = () => {
     return (
         <Section>
+        <Link to="/" >
             <h2>CityTogether</h2>
+        </Link>
             <Menu>
                 <MenuItem>
                     <Link to="/issues" >
