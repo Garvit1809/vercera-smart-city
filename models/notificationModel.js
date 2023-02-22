@@ -5,7 +5,7 @@ const notificationSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: "Helper",
     },
-    notification: {
+    message: {
         type: String,
         required: [true, 'notification is required!!']
     }
