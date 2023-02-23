@@ -16,8 +16,10 @@ const ImageContainer = styled.div`
 width: 45vw;
 height: 50vh;
 margin: 0 5vw;
+border-radius: 10px;
 
 img{
+    /* border-radius: 10px; */
     width: 100%;
     height: 100%;
 }
@@ -25,14 +27,88 @@ img{
 const DescriptionBox = styled.div`
 margin: 0 5vw;
 width: 35vw;
+text-align: left;
+
+p{
+    margin-bottom: 1.5rem;
+}
+
+h3,h4,h5{
+    font-weight: 500;
+}
+
+h4{
+    margin-bottom: 0.5rem;
+}
+
+h3{
+    margin-bottom: 1rem;
+}
 `
 
-const Updates = styled.div``
-const UpdateList = styled.li``
-const UpdateItem = styled.div``
-const UpdatedBy = styled.div``
+const Updates = styled.div`
+/* border: 1px solid red; */
+
+h2{
+    margin-bottom: 1.5rem;
+}
+
+padding: 2.5rem 5vw;
+text-align: left;
+`
+
+const UpdateList = styled.li`
+list-style: none;
+`
+
+const UpdateItem = styled.div`
+/* border: 1px solid red; */
+border-radius: 12px;
+padding: 0.6rem 1rem;
+margin-bottom: 2rem;
+-webkit-box-shadow: 0px 2px 16px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 2px 16px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 2px 16px 0px rgba(0,0,0,0.75);
+`
+
+
+const UpdatedBy = styled.div`
+display: flex;
+margin-bottom: 0.8rem;
+
+
+h3,h4,h5{
+    font-weight: 400;
+    margin-left: 0.5rem;
+}
+`
+
 const Content = styled.div``
-const UserImage = styled.div``
+const UserImage = styled.div`
+width: 2.5rem;
+height: 2.5rem;
+/* border: 1px solid red; */
+
+img{
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    margin-right: 1rem;
+}
+`
+
+const ContentImg = styled.div`
+width: 90vw;
+height: 40vh;
+/* border: 1px solid red; */
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+`
 
 const Comments = styled.div``
 
@@ -101,12 +177,18 @@ const SingleIssue = () => {
                                             <UserImage>
                                                 <img src={update.updatedBy.photo} alt="" />
                                             </UserImage>
+                                            <div>
                                             <h3>{update.updatedBy.name}</h3>
                                             <h4>{getReadableTime(update.createdAt)}</h4>
+                                            </div>
                                         </UpdatedBy>
                                         <Content>
+                                        <p>
                                             {update.updateContent}
+                                        </p>
+                                        <ContentImg>
                                             <img src={update.updateImages} alt="" />
+                                        </ContentImg>
                                         </Content>
                                     </UpdateItem>
                                 )

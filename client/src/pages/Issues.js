@@ -11,7 +11,7 @@ const Section = styled.div`
 `
 
 const IssueGrid = styled.div`
-border: 1px solid red;
+/* border: 1px solid red; */
 display: grid;
 grid-template-columns: auto auto;
 `

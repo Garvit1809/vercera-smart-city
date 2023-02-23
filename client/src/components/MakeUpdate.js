@@ -8,7 +8,9 @@ import axios from 'axios';
 import { API, BASE_URL } from '../utils/APIRoutes';
 import { getHeaders } from '../utils/helperFunction';
 
-const Section = styled.div``
+const Section = styled.div`
+margin: 1rem 0 2rem;
+`
 
 const style = {
     position: "absolute",
