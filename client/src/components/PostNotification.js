@@ -8,7 +8,11 @@ import axios from 'axios';
 import { API, BASE_URL } from '../utils/APIRoutes';
 import { getHeaders } from '../utils/helperFunction';
 
-const Section = styled.div``
+const Section = styled.div`
+text-align: right;
+padding-right: 5rem;
+margin-top: 1rem;
+`
 
 const style = {
     position: "absolute",
@@ -32,12 +36,17 @@ const PostNotification = (props) => {
     const [message, setMessage] = useState('')
 
     const postNotiHandler = async (e) => {
+        e.preventDefault();
         const { data } = await axios.post(`${BASE_URL}${API}/notification/`, {
             message
         }, {
             headers: getHeaders(props.token),
         })
         console.log(data);
+        // window.location.reload()
+        if (data.status === 'success') {
+            window.location.reload();
+        }
     }
 
     return (

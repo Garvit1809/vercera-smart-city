@@ -138,20 +138,20 @@ const SingleIssue = () => {
 
     const [userData, setUserData] = useState({});
 
-  useEffect(() => {
-    async function fetchUserData() {
-      const data = await JSON.parse(localStorage.getItem(localStorageUser));
-      setUserData(data);
-    }
-    fetchUserData();
-  }, []);
+    useEffect(() => {
+        async function fetchUserData() {
+            const data = await JSON.parse(localStorage.getItem(localStorageUser));
+            setUserData(data);
+        }
+        fetchUserData();
+    }, []);
 
 
     return (
         issue ? (
             <Section>
                 <Navbar />
-                <MakeUpdate token={userData.token} issueId={issueId}/>
+                <MakeUpdate token={userData.token} issueId={issueId} />
                 <IssueDescription>
                     <ImageContainer>
                         <img src={issue.issuePics} alt="" />
@@ -178,17 +178,20 @@ const SingleIssue = () => {
                                                 <img src={update.updatedBy.photo} alt="" />
                                             </UserImage>
                                             <div>
-                                            <h3>{update.updatedBy.name}</h3>
-                                            <h4>{getReadableTime(update.createdAt)}</h4>
+                                                <h3>{update.updatedBy.name}</h3>
+                                                <h4>{getReadableTime(update.createdAt)}</h4>
                                             </div>
                                         </UpdatedBy>
                                         <Content>
-                                        <p>
-                                            {update.updateContent}
-                                        </p>
-                                        <ContentImg>
-                                            <img src={update.updateImages} alt="" />
-                                        </ContentImg>
+                                            <p>
+                                                {update.updateContent}
+                                            </p>
+                                            {
+                                                update.updateImages ?
+                                                    <ContentImg>
+                                                        <img src={update.updateImages} alt="" />
+                                                    </ContentImg> : null
+                                            }
                                         </Content>
                                     </UpdateItem>
                                 )

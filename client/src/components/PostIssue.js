@@ -12,6 +12,10 @@ import { getHeaders } from '../utils/helperFunction';
 const Section = styled.div`
 /* display: flex; */
 /* align-items: flex-start; */
+/* border: 1px solid red; */
+text-align: right;
+padding-right: 5rem;
+margin-top: 1rem;
 `
 
 const style = {
@@ -84,7 +88,7 @@ const PostIssue = () => {
   };
 
   const postIssueHandler = async (e) => {
-    // e.preventDefault()
+    e.preventDefault()
 
     const { data } = await axios.post(`${BASE_URL}${API}/issue/`, {
       issueContent: issue.issueContent,
@@ -97,6 +101,7 @@ const PostIssue = () => {
       headers: getHeaders(userData.token),
     });
     console.log(data);
+    window.location.reload()
   }
 
   return (

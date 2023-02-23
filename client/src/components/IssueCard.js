@@ -132,11 +132,13 @@ const IssueCard = (props) => {
     }, []);
 
     const approveIssueHandler = async (e) => {
-        // e.preventDefauslt();
         const { data } = await axios.patch(`${BASE_URL}${API}/issue/${issue._id}/approve`, {}, {
             headers: getHeaders(userData.token),
         });
         console.log(data);
+        if (data.status === 'success') {
+            window.location.reload();
+        }
     }
 
     const closeissueHandler = async (e) => {
@@ -145,6 +147,9 @@ const IssueCard = (props) => {
             headers: getHeaders(userData.token),
         });
         console.log(data);
+        if (data.status === 'success') {
+            window.location.reload();
+        }
     }
 
     const navigate = useNavigate();

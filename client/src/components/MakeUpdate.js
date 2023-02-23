@@ -10,6 +10,10 @@ import { getHeaders } from '../utils/helperFunction';
 
 const Section = styled.div`
 margin: 1rem 0 2rem;
+/* border: 1px solid red; */
+
+text-align: right;
+padding-right: 4rem;
 `
 
 const style = {
@@ -62,7 +66,7 @@ const MakeUpdate = (props) => {
     };
 
     const postIssueUpdate = async (e) => {
-        // e.preventDefault();
+        e.preventDefault();
 
         const { data } = await axios.patch(`${BASE_URL}${API}/issue/${props.issueId}`, {
             updateContent,
@@ -71,6 +75,9 @@ const MakeUpdate = (props) => {
             headers: getHeaders(props.token),
         })
         console.log(data);
+        if (data.status === 'success') {
+            window.location.reload();
+        }
     }
 
     return (
