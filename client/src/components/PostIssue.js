@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import useStyles from '../components/modalStyles'
 import axios from 'axios';
@@ -10,7 +9,10 @@ import { API, BASE_URL } from '../utils/APIRoutes';
 import { localStorageUser } from '../utils/globalConstants';
 import { getHeaders } from '../utils/helperFunction';
 
-const Section = styled.div``
+const Section = styled.div`
+/* display: flex; */
+/* align-items: flex-start; */
+`
 
 const style = {
   position: "absolute",
@@ -120,7 +122,6 @@ const PostIssue = () => {
                 onChange={(e) => postImage(e.target.files)}
               />
             </div>
-
             <h3>Locations First Address Line</h3>
             <input type="text" name="locationAddressFirstLine" placeholder='Enter First Address Line' value={issue.locationAddressFirstLine} onChange={(e) => formHandler(e)} />
 

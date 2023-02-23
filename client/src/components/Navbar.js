@@ -3,14 +3,16 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const Section = styled.div`
-border: 1px solid red;
+/* border: 1px solid red; */
 display: flex;
 align-items: center;
 justify-content: space-between;
+padding: 0 2rem;
+margin-bottom: 0.5rem;
 `
 
 const Menu = styled.ul`
-border: 1px solid red;
+/* border: 1px solid red; */
 list-style: none;
 display: flex;
 align-items: center;
@@ -18,7 +20,7 @@ justify-content: space-between;
 `
 
 const MenuItem = styled.li`
-border: 1px solid red;
+/* border: 1px solid red; */
 margin: 0 1rem;
 `
 

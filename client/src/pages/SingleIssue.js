@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
+import MakeUpdate from '../components/MakeUpdate';
 import Navbar from '../components/Navbar'
 import { API, BASE_URL } from '../utils/APIRoutes';
-import { getReadableTime } from '../utils/globalConstants'
+import { getReadableTime, localStorageUser } from '../utils/globalConstants'
 
 const Section = styled.div``
 
@@ -59,11 +60,22 @@ const SingleIssue = () => {
         }
     }, [issueId])
 
+    const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    async function fetchUserData() {
+      const data = await JSON.parse(localStorage.getItem(localStorageUser));
+      setUserData(data);
+    }
+    fetchUserData();
+  }, []);
+
 
     return (
         issue ? (
             <Section>
                 <Navbar />
+                <MakeUpdate token={userData.token} issueId={issueId}/>
                 <IssueDescription>
                     <ImageContainer>
                         <img src={issue.issuePics} alt="" />
