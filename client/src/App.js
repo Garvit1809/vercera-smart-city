@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Notification from './pages/Notification';
 import SingleIssue from './pages/SingleIssue';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/pending' element={<PendingIssues/>} />
         <Route path='/completed' element={<CompletedIssues/>} />
         <Route path='/notifications' element={<Notification/>} />
+        <Route path='/profile' element={<Profile/>} />
       </Routes>
     </div>
   );

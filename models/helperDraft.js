@@ -5,12 +5,10 @@ const helperDraftSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "User",
   },
-  socialWorkDone: [
-    {
-        type: String,
-        required: [true, 'Tell us what good things u have done for society!!']
-    }
-  ],
+  socialWorkDone: {
+    type: String,
+    required: [true, 'Tell us what good things u have done for society!!']
+  },
   reason: {
     type: String,
     required: [true, 'Reason for becoming a helper!!']

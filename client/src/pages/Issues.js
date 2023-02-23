@@ -7,13 +7,14 @@ import PostIssue from '../components/PostIssue'
 import { API, BASE_URL } from '../utils/APIRoutes'
 
 const Section = styled.div`
-
+min-height: 100vh;
 `
 
 const IssueGrid = styled.div`
 /* border: 1px solid red; */
 display: grid;
 grid-template-columns: auto auto;
+margin-top: 1.5rem;
 `
 
 const Issues = () => {

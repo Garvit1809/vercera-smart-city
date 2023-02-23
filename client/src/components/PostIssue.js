@@ -101,7 +101,10 @@ const PostIssue = () => {
       headers: getHeaders(userData.token),
     });
     console.log(data);
-    window.location.reload()
+    // window.location.reload()
+    if (data.status === 'success') {
+      window.location.reload();
+  }
   }
 
   return (

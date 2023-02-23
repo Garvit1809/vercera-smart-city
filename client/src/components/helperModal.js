@@ -27,18 +27,24 @@ const style = {
     p: 4,
 };
 
-const PostNotification = (props) => {
-    // console.log(props);
+const HelperModal = (props) => {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [message, setMessage] = useState('')
 
-    const postNotiHandler = async (e) => {
+    const [helperData, setHelperData] = useState({
+        socialWorkDone: '',
+        reason: '',
+        alternatePhoneNumber: ''
+    })
+
+    const postHelperDraft = async (e) => {
         e.preventDefault();
-        const { data } = await axios.post(`${BASE_URL}${API}/notification/`, {
-            message
+        const { data } = await axios.post(`${BASE_URL}${API}/user/helper`, {
+            socialWorkDone: helperData.socialWorkDone,
+            reason: helperData.reason,
+            alternatePhoneNumber: helperData.alternatePhoneNumber
         }, {
             headers: getHeaders(props.token),
         })
@@ -48,9 +54,13 @@ const PostNotification = (props) => {
         }
     }
 
-    return (
-        <Section>
-            <Button onClick={handleOpen}>Post Notification</Button>
+    const formHandler = (e) => {
+        setHelperData({...helperData, [e.target.name]: e.target.value});
+    }
+
+  return (
+    <Section>
+        <Button onClick={handleOpen}>Become a Helper</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -58,16 +68,20 @@ const PostNotification = (props) => {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style} className={classes.modal} >
-                    <h1>Publish Notifications for general public</h1>
-                    <form onSubmit={postNotiHandler}>
-                        <h3>Notification Description</h3>
-                        <textarea name="issueContent" placeholder='Enter the notification' value={message} onChange={(e) => setMessage(e.target.value)} />
+                    <h1>Serve the nation by becoming a HELPER</h1>
+                    <form onSubmit={postHelperDraft}>
+                        <h3>Reason to becomen a Helper</h3>
+                        <textarea name="reason" placeholder='Reason for applying' value={helperData.reason} onChange={(e) => formHandler(e)} />
+                        <h3>Socila Work Done in the past</h3>
+                        <textarea name="socialWorkDone" placeholder='Good Social Work done by you' value={helperData.socialWorkDone} onChange={(e) => formHandler(e)} />
+                        <h3>Alternate Phone Number</h3>
+                        <input type="text" name="alternatePhoneNumber" placeholder='Alternate Contact Number' value={helperData.alternatePhoneNumber} onChange={(e) => formHandler(e)} />
                         <button type='submit'>Post Notification</button>
                     </form>
                 </Box>
             </Modal>
-        </Section>
-    )
+    </Section>
+  )
 }
 
-export default PostNotification
+export default HelperModal

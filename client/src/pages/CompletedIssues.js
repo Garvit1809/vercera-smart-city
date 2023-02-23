@@ -5,7 +5,9 @@ import IssueCard from '../components/IssueCard'
 import Navbar from '../components/Navbar'
 import { API, BASE_URL } from '../utils/APIRoutes'
 
-const Section = styled.div``
+const Section = styled.div`
+min-height: 100vh;
+`
 
 const IssueGrid = styled.div`
 display: grid;

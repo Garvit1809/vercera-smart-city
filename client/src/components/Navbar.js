@@ -51,6 +51,11 @@ const Navbar = () => {
                         Notifications
                     </Link>
                 </MenuItem>
+                <MenuItem>
+                    <Link to="/profile" >
+                        Profile
+                    </Link>
+                </MenuItem>
             </Menu>
         </Section>
     )

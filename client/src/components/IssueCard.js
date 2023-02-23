@@ -9,7 +9,8 @@ import { getHeaders } from '../utils/helperFunction'
 const Section = styled.div`
 /* border: 1px solid black; */
 width: 42.5vw;
-margin: 1rem .5vw 2rem 5vw;
+margin: 0 auto;
+/* margin: 1rem .5vw 2rem 5vw; */
 padding: 0.4rem 1rem;
 border-radius: 10px;
 

@@ -7,7 +7,7 @@ import { API, BASE_URL } from '../utils/APIRoutes'
 import { getReadableTime, localStorageUser } from '../utils/globalConstants'
 
 const Section = styled.div`
-
+min-height: 100vh;
 `
 
 const NotificationGrid = styled.div`
